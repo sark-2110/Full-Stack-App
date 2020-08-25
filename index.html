@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task -2</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="text-center bg-light" id="main">
+            <h1 class="display-4 p-3">Git Commit Show Videos &nbsp;</h1>
+            <div class="row text-center container">
+                <div class="col-sm-4">
+                    <button onClick="myfun()" class="btn btn-dark">Dark Mode Switch</button>
+                </div>
+                <form action="/new" method="POST" class="col-sm-4">
+                    <button class="btn btn-primary">Create New</button>
+                </form>
+                <form action="/logout" method="POST" class="col-sm-4 text-right">
+                    <button class="btn btn-primary">Logout</button>
+                </form>
+            </div>
+            <div id="displayData">
+                <br>
+                <% if (message) { %>
+                    <div class="alert alert-danger fade show" role="alert">
+                        <h5>You can only upvote only once during each session</h5>
+                    </div>
+                <% } %>
+                <% result.forEach(details => { %>
+                    <div class="p-3 mb-2 bg-light">
+                        <h2>Title: <%= details.title %> </h2>
+                        <h4>Tags: <%= details.tags %> </h4>
+                        <h4>Category: <%= details.category %></h4>
+                        <iframe src="<%= details.url %>" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+                        <br>
+                        <a type="button" href="/upvote/<%= details._id %>" class="btn btn-primary">Upvote</a>
+                        <a> Total Upvotes are: <%= details.claps%> </a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+        <script>
+            function myfun(){
+                var ca = document.cookie.split(';');
+                console.log(ca);
+                if(ca[ca.length-1]=="Dark"){
+                    document.cookie="Light";
+                }
+                else{
+                    document.cookie="Dark";
+                    document.getElementById('main').style.filter = "invert(100%)";
+                }
+            }
+            var ca = document.cookie.split(';');
+            console.log(ca);
+            if(ca[ca.length-1]=="Dark"){
+                console.log("gvjbhkn");
+                document.getElementById('main').style.filter = "invert(100%)";
+            }
+        </script>
+    </body>
+</html>
