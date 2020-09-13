@@ -16,7 +16,7 @@
                     <button class="btn btn-primary">Create New</button>
                 </form>
                 <form action="/logout" method="POST" class="col-sm-4 text-right">
-                    <button class="btn btn-primary">Logout</button>
+                    <button class="btn btn-danger">Logout</button>
                 </form>
             </div>
             <div id="displayData">
@@ -34,7 +34,7 @@
                         <iframe src="<%= details.url %>" width="560" height="315" frameborder="0" allowfullscreen></iframe>
                         <br>
                         <a type="button" href="/upvote/<%= details._id %>" class="btn btn-primary">Upvote</a>
-                        <a> Total Upvotes are: <%= details.claps%> </a>
+                        <a> Upvotes : <%= details.claps%> </a>
                     </div>
                 <% }) %>
             </div>

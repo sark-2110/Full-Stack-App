@@ -1,5 +1,4 @@
 const express = require('express');
-const fetch = require('node-fetch');
 var bodyParser = require('body-parser');
 const app = express();
 
@@ -11,7 +10,7 @@ const port = 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
 
-var info = ["false"];
+var sessions = ["false"];
 var message = false;
 
 const uri = 'mongodb+srv://GitCommitShow:GitCommitShow@cluster0.sbmyg.gcp.mongodb.net/GitCommitShow?retryWrites=true&w=majority';
@@ -26,7 +25,7 @@ MongoClient.connect(uri,{ useUnifiedTopology: true ,useNewUrlParser:true }, func
 var arrayLength = 2;
 
 app.get('/login', (req,res) =>{
-    if(info[0] == "true"){
+    if(sessions[0] == "true"){
         res.redirect('/video');
     }
     else{
@@ -43,8 +42,8 @@ app.post('/signin' , (req , res ) => {
                 res.redirect('/login');
             }
             if( req.body.password === result.password){
-                info.pop();
-                info.push("true");
+                sessions.pop();
+                sessions.push("true");
                 res.redirect('/video');
             }
             else{
@@ -55,12 +54,12 @@ app.post('/signin' , (req , res ) => {
 })
 
 app.post('/logout',(req,res) =>{
-    info.pop();
+    sessions.pop();
     message = false;
     res.redirect('login');
 })
 app.get('/video',(req,res)=>{
-    if(info[0] == "true"){
+    if(sessions[0] == "true"){
         MongoClient.connect(uri,{ useUnifiedTopology: true ,useNewUrlParser:true }, function(err, db) {
             if (err) throw err;
             var dbo = db.db("GitCommitShow");
